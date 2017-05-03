@@ -1,0 +1,6 @@
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\bin\Debug\Parser.exe.config
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\bin\Debug\Parser.exe
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\bin\Debug\Parser.pdb
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\obj\Debug\Parser.csprojResolveAssemblyReference.cache
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\obj\Debug\Parser.exe
+c:\users\lealcybj\documents\visual studio 2015\Projects\Parser\Parser\obj\Debug\Parser.pdb
