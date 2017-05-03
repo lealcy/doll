@@ -77,14 +77,7 @@ namespace Parser
             Line = 1;
             Col = 1;
 
-            while (true)
-            {
-                if (!ParseToken(T.Statement))
-                {
-                    break;
-                }
-            }
-
+            while (ParseToken(T.Statement)) ;
             return Pos;
         }
 
