@@ -31,13 +31,6 @@ namespace Parser
                         Console.WriteLine(s);
                     }
                 }
-                else
-                {
-                    foreach (var s in p.ParsedCode)
-                    {
-                        Console.WriteLine("{0} {1}", s.Token.ToString(), s.Text);
-                    }
-                }
             }
         }
     }
