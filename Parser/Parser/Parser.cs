@@ -17,7 +17,7 @@ namespace Parser
         GreaterThanOperator, LessThanOperator, GreaterOrEqualToOperator, LessOrEqualToOperator,
         AndOperator, OrOperator, BitwiseAndOperator, BitwiseLeftShiftOperator, BitwiseRightShiftOperator,
         BitwiseOrOperator, BitwiseXorOperator, BooleanLiteral, BooleanFalse, BooleanTrue, PrefixOperator,
-        PostfixOperator, MinusSign, PlusSign, IncrementOperator, DecrementOperator, 
+        PostfixOperator, MinusSign, PlusSign, IncrementOperator, DecrementOperator, Pol
     };
 
     public class Parser
@@ -48,10 +48,10 @@ namespace Parser
         {
             ParseWhiteSpace();
 
-            switch(token)
+            switch (token)
             {
                 case T.Statement:
-                    if(Pos == Code.Length)
+                    if (Pos == Code.Length)
                     {
                         return false;
                     }
@@ -70,7 +70,7 @@ namespace Parser
                             }
                             ErrorExpected(token, T.AssignmentValue);
                             return false;
-                        } 
+                        }
                         ErrorExpected(token, T.AssignmentOperator);
                         return false;
                     }
@@ -81,10 +81,11 @@ namespace Parser
 
                 case T.Expression:
                     bool dataTypeDefined = false;
-                    if (!ParseToken(T.Identifier, true)) {
+                    if (!ParseToken(T.Identifier, true))
+                    {
                         dataTypeDefined = ParseToken(T.DataType);
                     }
-                    while (ParseToken(T.PrefixOperator));
+                    while (ParseToken(T.PrefixOperator)) ;
                     if (ParseToken(T.Value))
                     {
                         while (ParseToken(T.PostfixOperator)) ;
@@ -116,27 +117,31 @@ namespace Parser
                     }
                     return dataTypeDefined;
 
-                case T.PrefixOperator: return ParseToken(T.IncrementOperator) || ParseToken(T.DecrementOperator) ||
+                case T.PrefixOperator:
+                    return ParseToken(T.IncrementOperator) || ParseToken(T.DecrementOperator) ||
                         ParseToken(T.PlusSign) || ParseToken(T.MinusSign);
 
                 case T.PostfixOperator: return ParseToken(T.IncrementOperator) || ParseToken(T.DecrementOperator);
 
-                case T.Operator: return ParseToken(T.AddictionOperator) || ParseToken(T.SubtractionOperator) ||
+                case T.Operator:
+                    return ParseToken(T.AddictionOperator) || ParseToken(T.SubtractionOperator) ||
                         ParseToken(T.MultplicationOperator) || ParseToken(T.DivisionOperator) ||
                         ParseToken(T.ModuloOperator) || ParseToken(T.LogicalOperator) ||
-                        ParseToken(T.BitwiseOperator) ||ParseToken(T.ComparisonOperator);
+                        ParseToken(T.BitwiseOperator) || ParseToken(T.ComparisonOperator);
 
                 case T.Value: return ParseToken(T.Literal) || ParseToken(T.Identifier);
 
                 case T.Literal: return ParseToken(T.Integer) || ParseToken(T.BooleanLiteral);
 
-                case T.ComparisonOperator: return ParseToken(T.EqualToOperator) || ParseToken(T.NotEqualToOperator) ||
+                case T.ComparisonOperator:
+                    return ParseToken(T.EqualToOperator) || ParseToken(T.NotEqualToOperator) ||
                         ParseToken(T.GreaterOrEqualToOperator) || ParseToken(T.LessOrEqualToOperator) ||
                         ParseToken(T.GreaterThanOperator) || ParseToken(T.LessThanOperator);
 
                 case T.LogicalOperator: return ParseToken(T.AndOperator) || ParseToken(T.OrOperator);
 
-                case T.BitwiseOperator: return ParseToken(T.BitwiseAndOperator) || ParseToken(T.BitwiseOrOperator) ||
+                case T.BitwiseOperator:
+                    return ParseToken(T.BitwiseAndOperator) || ParseToken(T.BitwiseOrOperator) ||
                         ParseToken(T.BitwiseXorOperator) || ParseToken(T.BitwiseLeftShiftOperator) ||
                         ParseToken(T.BitwiseRightShiftOperator);
 
@@ -204,6 +209,10 @@ namespace Parser
 
                 case T.CloseParenthesis: return ParseTokenText(token, @"\)");
 
+                case T.Pol:
+                    Error(token, "Once you rationalise the first misstep, it's easy to fall into a pattern of behaviour.");
+                    break;
+
                 default:
                     Error(token, "Not yet implemented.");
                     break;
@@ -223,7 +232,7 @@ namespace Parser
                     return false;
                 }
                 if (!tryParse)
-                { 
+                {
                     Console.WriteLine("DEBUG: (Line: {0}, Col: {1}) Parsed token '{2}', with value '{3}'.", Line, Col, token.ToString(), pr.Text);
                     ParsedCode.Add(pr);
                     Pos += pr.Text.Length;
@@ -243,7 +252,8 @@ namespace Parser
                 {
                     Col = 1;
                     Line++;
-                } else
+                }
+                else
                 {
                     Col++;
                 }

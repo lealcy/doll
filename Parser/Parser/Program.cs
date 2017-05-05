@@ -20,6 +20,10 @@ namespace Parser
             {
                 Console.Write("> ");
                 code = Console.ReadLine();
+                if (code == "exit" || code == "quit" || code == "bye")
+                {
+                    return;
+                }
                 p.ErrorList.Clear();
                 p.ParsedCode.Clear();
                 result = p.Parse(code);
